@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Agrim Dahal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/favicon.jpg" type="image/x-icon">
+    <style>
+        .icon-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .icon-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .icon-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-white opacity-0 transform -translate-y-10 transition-opacity duration-1000 ease-out">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-12 py-4">
+                <a href="index.html" class="text-gray-700 hover:text-green-500 font-semibold transform transition-transform duration-300 hover:scale-110">Home</a>
+                <a href="project.html" class="text-gray-700 hover:text-green-500 font-semibold transform transition-transform duration-300 hover:scale-110">Projects</a>
+                <a href="contact.html" class="text-gray-700 hover:text-green-500 font-semibold transform transition-transform duration-300 hover:scale-110">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="flex flex-col md:flex-row items-center justify-center w-full max-w-4xl mx-auto space-y-8 md:space-y-0 md:space-x-8">
+            <!-- Form -->
+            <div class="p-8 w-full max-w-sm ">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Get in Touch</h2>
+                <form id="contact-form">
+                    <div class="mb-4">
+                        <label for="user_name" class="block text-gray-700 font-bold mb-2">Name</label>
+                        <input type="text" id="user_name" name="user_name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="user_email" class="block text-gray-700 font-bold mb-2">Email</label>
+                        <input type="email" id="user_email" name="user_email" class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-700 font-bold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500" required></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="bg-green-800 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-white-300 w-full">Send</button>
+                    </div>
+                </form>
+            </div>
+            
+
+            <!-- Image -->
+            <div class="w-full max-w-sm flex items-center justify-center">
+                <img src="./assets/contact.jpg" alt="Agrim Dahal" class="w-full h-auto object-cover rounded-lg shadow-md">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 shadow-md">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-8">
+                <div class="icon-tooltip">
+                    <a href="https://www.linkedin.com" target="_blank" class="text-black text-3xl hover:text-gray-400"><i class="fab fa-linkedin-in"></i></a>
+                    <span class="tooltip-text">LinkedIn</span>
+                </div>
+                <div class="icon-tooltip">
+                    <a href="https://x.com/AgreemDahal" target="_blank" class="text-black text-3xl hover:text-gray-400"><i class="fab fa-twitter"></i></a>
+                    <span class="tooltip-text">Twitter</span>
+                </div>
+                <div class="icon-tooltip">
+                    <a href="https://github.com/agreemdahal" target="_blank" class="text-black text-3xl hover:text-gray-400"><i class="fab fa-github"></i></a>
+                    <span class="tooltip-text">GitHub</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script>
+        emailjs.init("xhZo977JVRPhhWORj"); 
+
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            emailjs.sendForm('service_0ejqwgk', 'template_kuhriys', this)
+                .then(function (response) {
+                    console.log('Success:', response);
+                    alert('Message sent successfully');
+                }, function (error) {
+                    console.log('Error:', error);
+                    alert('Failed to send message');
+                });
+        });
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelector('nav').classList.remove('opacity-0', 'transform', '-translate-y-10');
+        });
+    </script>
+</body>
+</html>
